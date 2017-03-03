@@ -19,6 +19,10 @@ install_pips() {
     pip install scikit-learn
 }
 
+setup_swiss_german_locale() {
+    locale-gen de_CH.UTF-8
+}
+
 apt-get update
 
 fix_lc_all_for_bash_rc /root/.bashrc
@@ -26,4 +30,4 @@ fix_lc_all_for_bash_rc /home/ubuntu/.bashrc
 
 setup_pip
 install_pips
-
+setup_swiss_german_locale
