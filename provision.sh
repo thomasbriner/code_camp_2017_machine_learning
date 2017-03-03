@@ -23,6 +23,46 @@ setup_swiss_german_locale() {
     locale-gen de_CH.UTF-8
 }
 
+install_java() {
+    apt-get install -y openjdk-8-jdk
+}
+
+install_desktop_environment() {
+    apt-get install -y ubuntu-desktop
+}
+
+setup_user_password() {
+    echo "ubuntu:ubuntu" | chpasswd
+}
+
+install_weka() {
+    WEKA_VERSION=3-8-1
+    apt-get install -y unzip
+
+    wget http://prdownloads.sourceforge.net/weka/weka-${WEKA_VERSION}.zip
+    unzip weka-${WEKA_VERSION} -d /opt
+    echo -e "#!/usr/bin/env sh\njava -jar /opt/weka-${WEKA_VERSION}/weka.jar" > /usr/local/bin/weka
+    chmod +x /usr/local/bin/weka
+}
+
+setup_weka() {
+    DESKTOP_DIR=/usr/local/share/applications
+    mkdir -p $DESKTOP_DIR
+    DESKTOP_FILE=$DESKTOP_DIR/weka.desktop
+    cat > $DESKTOP_FILE <<EOF
+[Desktop Entry]
+Version=1.0
+Name=Weka 3.8.1
+Comment=Waikato Environment for Knowledge Analysis (WEKA)
+Exec=/usr/local/bin/weka
+Terminal=false
+Icon=/opt/weka-3-8-1/weka.ico
+Type=Application
+Categories=Application;
+EOF
+    chmod +x $DESKTOP_FILE
+}
+
 apt-get update
 
 fix_lc_all_for_bash_rc /root/.bashrc
@@ -31,3 +71,9 @@ fix_lc_all_for_bash_rc /home/ubuntu/.bashrc
 setup_pip
 install_pips
 setup_swiss_german_locale
+
+install_java
+install_desktop_environment
+setup_user_password
+install_weka
+setup_weka
