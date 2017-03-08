@@ -13,10 +13,16 @@ setup_pip() {
     pip install --upgrade pip
 }
 
+install_quandl_dependencies() {
+    apt-get install -y libffi-dev libssl-dev
+}
+
 install_pips() {
     pip install NumPy
     pip install SciPy
     pip install scikit-learn
+    pip install pandas
+    pip install quandl
 }
 
 setup_swiss_german_locale() {
@@ -69,6 +75,7 @@ fix_lc_all_for_bash_rc /root/.bashrc
 fix_lc_all_for_bash_rc /home/ubuntu/.bashrc
 
 setup_pip
+install_quandl_dependencies
 install_pips
 setup_swiss_german_locale
 
