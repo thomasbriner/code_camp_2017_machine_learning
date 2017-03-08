@@ -45,7 +45,7 @@ install_weka() {
     WEKA_VERSION=3-8-1
     apt-get install -y unzip
 
-    wget http://prdownloads.sourceforge.net/weka/weka-${WEKA_VERSION}.zip
+    wget --no-verbose http://prdownloads.sourceforge.net/weka/weka-${WEKA_VERSION}.zip
     unzip weka-${WEKA_VERSION} -d /opt
     echo -e "#!/usr/bin/env sh\njava -jar /opt/weka-${WEKA_VERSION}/weka.jar" > /usr/local/bin/weka
     chmod +x /usr/local/bin/weka
