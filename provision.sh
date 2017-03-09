@@ -23,6 +23,7 @@ install_pips() {
     pip install scikit-learn
     pip install pandas
     pip install quandl
+	pip install tensorflow
 }
 
 setup_swiss_german_locale() {
